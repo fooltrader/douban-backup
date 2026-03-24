@@ -37,7 +37,7 @@ const PropertyType = {
   RELEASE_DATE: 'date',
   MUSICIAN: 'rich_text',
   PUBLICATION_DATE: 'date',
-  PUBLISHING_HOUSE: 'rich_text',
+  PUBLISHING_HOUSE: 'select',  // 修复：改为 select
   WRITER: 'rich_text',
   ISBN: 'number',
   TAG: 'multi_select',
