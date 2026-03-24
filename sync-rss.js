@@ -105,7 +105,6 @@ const dramaDBID = process.env.NOTION_DRAMA_DATABASE_ID;
         await handleFeed(feedData[cateKey], cateKey);
       } catch (error) {
         console.error(`Failed to handle ${cateKey} feed. `, error);
-        // 不中断，继续处理其他分类
       }
     }
   }
@@ -341,6 +340,11 @@ function getPropertyValye(value, type, key) {
     case 'date':
       res = { date: { start: value } };
       break;
+    case 'select':  // 新增：处理单选类型
+      res = {
+        select: value ? { name: value } : null,
+      };
+      break;
     case 'multi_select':
       res = key === DB_PROPERTIES.RATING ? {
         'multi_select': value ? [{ name: value.toString() }] : [],
@@ -357,7 +361,7 @@ function getPropertyValye(value, type, key) {
       res = { number: value ? Number(value) : null };
       break;
     case 'url':
-      res = { url: value || null }; // 修复：原来是 url || url，变量未定义
+      res = { url: value || null };
       break;
     default:
       break;
